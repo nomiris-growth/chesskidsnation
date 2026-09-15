@@ -21,9 +21,25 @@ export function DemoForm() {
   const [regionOpen, setRegionOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!name.trim()) e.name = "Child's name is required";
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Valid email is required";
+    if (!phone.trim()) e.phone = "Mobile number is required";
+    if (!region) e.region = "Please select your region";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
@@ -33,20 +49,20 @@ export function DemoForm() {
 
   if (submitted) {
     return (
-      <div className="flex min-h-[460px] flex-col items-center justify-center rounded-3xl bg-white p-8 text-center shadow-[0_30px_60px_-20px_rgba(249,115,22,0.45)]">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-          <CheckCircle2 className="h-12 w-12 text-green-600" />
+      <div className="kid-card flex min-h-[460px] flex-col items-center justify-center p-8 text-center">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#06D6A0] border-2 border-slate-900">
+          <CheckCircle2 className="h-12 w-12 text-white" />
         </div>
-        <h3 className="mt-5 text-2xl font-extrabold text-slate-900">
-          You&apos;re all set!
+        <h3 className="mt-5 text-2xl font-black text-slate-900">
+          You&apos;re all set! 🎉
         </h3>
-        <p className="mt-2 max-w-xs text-sm text-slate-600">
-          Thank you for booking your FREE demo class. Our team will reach out
+        <p className="mt-2 max-w-xs text-sm font-medium text-slate-600">
+          Thank you for booking your demo class. Our team will reach out
           shortly to confirm your slot.
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="upstep-orange-btn mt-6 rounded-full px-6 py-3 text-sm font-bold uppercase"
+          className="kid-cta-btn mt-6 rounded-full px-6 py-3 text-sm font-black uppercase"
         >
           Book another demo
         </button>
@@ -57,99 +73,107 @@ export function DemoForm() {
   return (
     <div
       id="book-demo"
-      className="rounded-3xl bg-white p-5 shadow-[0_30px_60px_-20px_rgba(249,115,22,0.45)] sm:p-7"
+      className="kid-card p-5 sm:p-7"
     >
       <h3 className="text-center text-xl font-extrabold text-slate-900 sm:text-2xl">
-        Fill in the details to book your FREE Demo session
+        Fill in the details to book your Demo Session
       </h3>
 
-      <form onSubmit={onSubmit} className="mt-5 space-y-3">
+      <form onSubmit={onSubmit} noValidate className="mt-5 space-y-4">
         {/* Child name */}
-        <input
-          required
-          type="text"
-          placeholder="Child's Full Name *"
-          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-200"
-        />
+        <div>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            placeholder="Child's Full Name *"
+            aria-invalid={!!errors.name}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.name ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+          />
+          {errors.name && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.name}</p>}
+        </div>
 
         {/* Parent email */}
-        <input
-          required
-          type="email"
-          placeholder="Parent's Email ID *"
-          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-200"
-        />
+        <div>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Parent's Email ID *"
+            aria-invalid={!!errors.email}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.email ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+          />
+          {errors.email && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.email}</p>}
+        </div>
 
         {/* Phone + country code */}
-        <div className="flex gap-2">
-          {/* Country code dropdown */}
-          <div className="relative w-[42%]">
-            <button
-              type="button"
-              onClick={() => setCountryOpen((v) => !v)}
-              className="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-slate-800 focus:border-orange-400 focus:outline-none"
-            >
-              <span className="flex items-center gap-1.5">
-                <Globe className="h-4 w-4 text-orange-500" />
-                <span className="truncate">{country.code}</span>
-              </span>
-              <ChevronDown
-                className={`h-4 w-4 text-slate-400 transition-transform ${
-                  countryOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {countryOpen && (
-              <div className="absolute left-0 right-0 top-full z-30 mt-1 max-h-56 overflow-y-auto rounded-xl border border-slate-100 bg-white p-1 shadow-xl">
-                {countryCodes.map((c) => (
-                  <button
-                    key={c.code}
-                    type="button"
-                    onClick={() => {
-                      setCountry(c);
-                      setCountryOpen(false);
-                    }}
-                    className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-orange-50"
-                  >
-                    {c.label}
-                  </button>
-                ))}
-              </div>
-            )}
+        <div>
+          <div className="flex gap-2">
+            <div className="relative w-[38%] sm:w-[36%]">
+              <button
+                type="button"
+                onClick={() => setCountryOpen((v) => !v)}
+                className="flex w-full items-center justify-between rounded-2xl border-2 border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-slate-800 focus:border-[#7C3AED] focus:outline-none"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Globe className="h-4 w-4 text-[#7C3AED]" />
+                  <span className="truncate">{country.code}</span>
+                </span>
+                <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform ${countryOpen ? "rotate-180" : ""}`} />
+              </button>
+              {countryOpen && (
+                <div className="absolute left-0 right-0 top-full z-30 mt-1 max-h-56 overflow-y-auto rounded-xl border-2 border-slate-900 bg-white p-1 shadow-[4px_4px_0_#1A2744]">
+                  {countryCodes.map((c) => (
+                    <button
+                      key={c.code}
+                      type="button"
+                      onClick={() => {
+                        setCountry(c);
+                        setCountryOpen(false);
+                      }}
+                      className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-[#FFFBEB]"
+                    >
+                      {c.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              type="tel"
+              placeholder="Parent's Mobile *"
+              aria-invalid={!!errors.phone}
+              className={`flex-1 rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.phone ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+            />
           </div>
-          <input
-            required
-            type="tel"
-            placeholder="Parent's Mobile Number *"
-            className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-200"
-          />
+          {errors.phone && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.phone}</p>}
         </div>
 
         {/* City */}
         <input
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           type="text"
           placeholder="City"
-          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-200"
+          className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
         />
 
         {/* Region */}
-        <div className="relative">
+        <div>
           <button
             type="button"
             onClick={() => setRegionOpen((v) => !v)}
-            className="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-200"
+            aria-invalid={!!errors.region}
+            className={`flex w-full items-center justify-between rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 ${errors.region ? "border-red-400 focus:border-red-400 focus:ring-red-100 text-slate-900" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
           >
-            <span className={region ? "text-slate-900" : "text-slate-400"}>
-              {region || "Select Your Region *"}
-            </span>
-            <ChevronDown
-              className={`h-4 w-4 text-slate-400 transition-transform ${
-                regionOpen ? "rotate-180" : ""
-              }`}
-            />
+            <span className={region ? "text-slate-900" : "text-slate-400"}>{region || "Select Your Region *"}</span>
+            <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${regionOpen ? "rotate-180" : ""}`} />
           </button>
+          {errors.region && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.region}</p>}
           {regionOpen && (
-            <div className="absolute left-0 right-0 top-full z-30 mt-1 max-h-56 overflow-y-auto rounded-xl border border-slate-100 bg-white p-1 shadow-xl">
+            <div className="mt-1 max-h-56 overflow-y-auto rounded-xl border-2 border-slate-900 bg-white p-1 shadow-[4px_4px_0_#1A2744]">
               {regions.map((r) => (
                 <button
                   key={r}
@@ -157,8 +181,9 @@ export function DemoForm() {
                   onClick={() => {
                     setRegion(r);
                     setRegionOpen(false);
+                    setErrors((p) => ({ ...p, region: "" }));
                   }}
-                  className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-orange-50"
+                  className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-[#FFFBEB]"
                 >
                   {r}
                 </button>
@@ -170,14 +195,14 @@ export function DemoForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="upstep-orange-btn mt-1 flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-extrabold uppercase tracking-wide disabled:opacity-80"
+          className="kid-cta-btn mt-2 flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-black uppercase tracking-wide disabled:opacity-60"
         >
           {submitting ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" /> Booking...
             </>
           ) : (
-            "Book a FREE Demo Class"
+            <>Book a Demo Class</>
           )}
         </button>
       </form>

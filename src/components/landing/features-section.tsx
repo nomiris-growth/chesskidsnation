@@ -1,10 +1,10 @@
-import { Award, Video, Brain, Globe2, Trophy } from "lucide-react";
+import { Award, Video, Brain, Globe2, Trophy, HeartHandshake } from "lucide-react";
 
 const features = [
   {
     icon: Award,
-    title: "Certified by GM Viswanathan Anand",
-    body: "Earn Level completion certificate Signed & inspired by the 5-time World Chess Champion.",
+    title: "Certificates Kids Love to Earn",
+    body: "Every level ends with a bright certificate your child can share proudly - a small win that keeps them excited for the next step.",
     blob: "bg-orange-100",
     iconColor: "text-orange-600",
     titleColor: "text-blue-700",
@@ -13,8 +13,8 @@ const features = [
   },
   {
     icon: Video,
-    title: "Live, Personalized & Engaging Classes",
-    body: "Interactive sessions tailored to your child's learning pace.",
+    title: "Live Classes That Fit Your Child",
+    body: "Fun, small-group or 1-on-1 lessons that move at your child's pace. Easy to join from home - and easy to love.",
     blob: "bg-blue-100",
     iconColor: "text-blue-600",
     titleColor: "text-orange-600",
@@ -23,8 +23,8 @@ const features = [
   },
   {
     icon: Brain,
-    title: "Scientifically Structured Curriculum",
-    body: "Developed through years of expertise for steady learning and success.",
+    title: "A Clear, Step-by-Step Path",
+    body: "5 simple levels plus Master Level - so your child always knows what's next and never feels lost.",
     blob: "bg-purple-100",
     iconColor: "text-purple-600",
     titleColor: "text-blue-700",
@@ -33,8 +33,8 @@ const features = [
   },
   {
     icon: Globe2,
-    title: "World's #1 Online Chess Academy",
-    body: "Shaping young minds through chess, loved by students and trusted by parents.",
+    title: "Trusted by Families Worldwide",
+    body: "Loved by parents in 10+ countries because kids stay curious, confident, and excited to come back.",
     blob: "bg-pink-100",
     iconColor: "text-pink-600",
     titleColor: "text-orange-600",
@@ -43,8 +43,8 @@ const features = [
   },
   {
     icon: Trophy,
-    title: "Expert Chess Coaches",
-    body: "Internationally experienced & skilled coaches guiding your child to success.",
+    title: "Kind, Expert Coaches",
+    body: "Patient, FIDE-rated coaches who make hard ideas easy - and cheer your child on every move.",
     blob: "bg-emerald-100",
     iconColor: "text-emerald-600",
     titleColor: "text-blue-700",
@@ -54,9 +54,9 @@ const features = [
 ];
 
 const extraCard = {
-  icon: Award,
+  icon: HeartHandshake,
   title: "Seamless Parent Support",
-  body: "Seamless learning support for parents and students.",
+  body: "Quick updates, easy scheduling, and help whenever you need it - we keep you in the loop.",
   blob: "bg-amber-100",
   iconColor: "text-amber-600",
   titleColor: "text-orange-600",
@@ -69,8 +69,11 @@ export function FeaturesSection() {
         {/* Header */}
         <div className="text-center">
           <h2 className="upstep-section-underline text-2xl font-extrabold text-slate-900 sm:text-3xl lg:text-[34px]">
-            We are Your Ultimate Chess Partner: Here&apos;s Why!
+            Why Parents Like You Choose Us - And Kids Love to Stay
           </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-sm font-medium text-slate-600">
+            Simple, friendly, and results you can see - no jargon, just progress your child feels.
+          </p>
         </div>
 
         {/* Cards grid */}

@@ -25,13 +25,13 @@ const reviews = [
     name: "Sawan Verma",
     initial: "S",
     color: "#10b981",
-    text: "We are happy to see the improvement n growing interest in chess for my son Ayansh Verma. Thanks to the coach Priyasivadharsini and Upstep Academy.",
+    text: "We are happy to see the improvement n growing interest in chess for my son Ayansh Verma. Thanks to the coach Priyasivadharsini and ChessKidsNation.",
   },
   {
     name: "Tenneti Poornima",
     initial: "T",
     color: "#ec4899",
-    text: "I strongly recommend Upstep Academy and tutor Mr Prasad Harendra. I'm grateful to the team especially RM Mr Anthony, he is easily accessible on WhatsApp and flexible in changing the schedules.",
+    text: "I strongly recommend ChessKidsNation and tutor Mr Prasad Harendra. I'm grateful to the team especially RM Mr Anthony, he is easily accessible on WhatsApp and flexible in changing the schedules.",
   },
   {
     name: "Deepthi Kantheti",
@@ -43,7 +43,7 @@ const reviews = [
     name: "Anthony Kumar",
     initial: "A",
     color: "#0284c7",
-    text: "I am based in Hong Kong and I highly recommend Upstep Academy for their excellent courses and training methodology. My son Jaiden has greatly benefited. N Shankar (RM) is superb.",
+    text: "I am based in Hong Kong and I highly recommend ChessKidsNation for their excellent courses and training methodology. My son Jaiden has greatly benefited. N Shankar (RM) is superb.",
   },
   {
     name: "Kanimozhi Sekaran",
@@ -61,7 +61,7 @@ const reviews = [
     name: "Sanket Gupta",
     initial: "S",
     color: "#16a34a",
-    text: "We are extremely happy with the Upstep Academy online chess classes. Our coach has been incredibly patient, encouraging, and knows exactly how to keep young children engaged.",
+    text: "We are extremely happy with the ChessKidsNation online chess classes. Our coach has been incredibly patient, encouraging, and knows exactly how to keep young children engaged.",
   },
 ];
 
@@ -72,7 +72,7 @@ export function ParentsReviews() {
         {/* Header */}
         <div className="text-center">
           <h2 className="upstep-section-underline text-2xl font-extrabold text-slate-900 sm:text-3xl lg:text-[34px]">
-            Don&apos;t Take Our Word for It — Hear from Parents!
+            Don&apos;t Take Our Word for It - Hear from Parents!
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-[15px]">
             Forget the research and our claims. Trust in the experiences of

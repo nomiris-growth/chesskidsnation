@@ -103,8 +103,8 @@ export function StatsSection() {
           {/* Card 1: Demo requirements */}
           <div className="rounded-3xl bg-white p-6 text-slate-900 shadow-xl sm:p-8">
             <h3 className="relative inline-block text-xl font-extrabold text-slate-900 sm:text-2xl">
-              All you need for FREE Demo Class is
-              <span className="absolute -bottom-2 left-0 h-[3px] w-24 rounded-full bg-orange-500" />
+              For Your Demo, Just Bring
+              <span className="absolute -bottom-2 left-0 h-[3px] w-24 rounded-full bg-[#FFD23F]" />
             </h3>
 
             <div className="mt-6 space-y-4">
@@ -124,13 +124,11 @@ export function StatsSection() {
             </div>
 
             <p className="mt-6 text-[13.5px] leading-relaxed text-slate-700">
-              <span className="font-bold text-indigo-700">The Objective</span> of our demo is to
-              assess your child&apos;s <span className="font-bold text-indigo-700">Chess level</span>,
-              give you an <span className="font-bold text-emerald-600">experience</span> of our
-              online Chess class, and also{" "}
-              <span className="font-bold text-rose-700">show you the format</span> in which chess
-              is taught online by our{" "}
-              <span className="font-bold text-pink-600">well-experienced coaches</span>
+              Our free demo is simple: we meet your child where they are, let
+              them <span className="font-bold text-emerald-600">try a real class</span>,
+              and show you{" "}
+              <span className="font-bold text-indigo-700">how learning works</span>{" "}
+              - so you can decide with confidence, no pressure.
             </p>
           </div>
 
@@ -140,20 +138,20 @@ export function StatsSection() {
             <div className="pointer-events-none absolute right-3 top-3 h-20 w-20 rounded-full border-2 border-dashed border-orange-200" />
 
             <h3 className="relative inline-block text-xl font-extrabold text-slate-900 sm:text-2xl">
-              Chess, A life skill!!
-              <span className="absolute -bottom-2 left-0 h-[3px] w-24 rounded-full bg-slate-300" />
+              Chess Helps in Real Life, Too
+              <span className="absolute -bottom-2 left-0 h-[3px] w-24 rounded-full bg-[#FFD23F]" />
             </h3>
 
             <p className="mt-6 text-[15px] font-semibold leading-relaxed text-slate-700">
-              Playing Chess can make you{" "}
+              Chess quietly builds skills kids use every day -{" "}
               <span className="font-extrabold">
-                <span className="text-rose-600">A GRANDMASTER</span> -{" "}
-                <span className="text-blue-700">AN ENGINEER</span> -{" "}
-                <span className="text-emerald-600">A MATHEMATICIAN</span> -{" "}
-                <span className="text-purple-600">A CODER</span> -{" "}
-                <span className="text-orange-600">A FOOTBALLER</span> -{" "}
-                <span className="text-pink-600">AN ARTIST</span> -{" "}
-                <span className="text-cyan-600">A SCIENTIST</span>!
+                <span className="text-rose-600">focus</span> •{" "}
+                <span className="text-blue-700">patience</span> •{" "}
+                <span className="text-emerald-600">math thinking</span> •{" "}
+                <span className="text-purple-600">problem-solving</span> •{" "}
+                <span className="text-orange-600">confidence</span> •{" "}
+                <span className="text-pink-600">creativity</span> •{" "}
+                <span className="text-cyan-600">sportsmanship</span>!
               </span>
             </p>
 

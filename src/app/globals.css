@@ -42,17 +42,30 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Upstep brand palette */
-  --color-upstep-orange: #f97316;
-  --color-upstep-orange-dark: #ea580c;
-  --color-upstep-orange-light: #ff8c42;
-  --color-upstep-cream: #fff8f3;
-  --color-upstep-pink: #ff3e9d;
-  --color-upstep-blue: #0284c7;
-  --color-upstep-teal: #0d9488;
-  --color-upstep-purple: #8b5cf6;
-  --color-upstep-yellow: #fcb900;
-  --color-upstep-dark: #1a1a1a;
+  /* ChessKidsNation — Kid-friendly palette */
+  --color-kid-yellow: #FFD23F;
+  --color-kid-yellow-dark: #F2B705;
+  --color-kid-coral: #FF6B6B;
+  --color-kid-coral-dark: #E55A5A;
+  --color-kid-mint: #06D6A0;
+  --color-kid-mint-dark: #05B48A;
+  --color-kid-sky: #118AB2;
+  --color-kid-lavender: #A78BFA;
+  --color-kid-purple: #7C3AED;
+  --color-kid-pink: #FF7EB8;
+  --color-kid-cream: #FFFBEB;
+  --color-kid-navy: #1A2744;
+  /* legacy aliases for compatibility */
+  --color-upstep-orange: #FF6B6B;
+  --color-upstep-orange-dark: #E55A5A;
+  --color-upstep-orange-light: #FF8A7A;
+  --color-upstep-cream: #FFFBEB;
+  --color-upstep-pink: #FF7EB8;
+  --color-upstep-blue: #118AB2;
+  --color-upstep-teal: #06D6A0;
+  --color-upstep-purple: #7C3AED;
+  --color-upstep-yellow: #FFD23F;
+  --color-upstep-dark: #1A2744;
   --color-upstep-gray: #6b7280;
 }
 
@@ -135,18 +148,47 @@
   }
 }
 
-/* ============== Upstep custom utilities ============== */
+/* ============== ChessKidsNation — Kid-friendly utilities ============== */
 
 @layer utilities {
   .upstep-orange-btn {
-    background: linear-gradient(135deg, #ff8c42 0%, #f97316 50%, #ea580c 100%);
+    background: #1A2744;
     color: #ffffff;
-    box-shadow: 0 8px 20px -6px rgba(249, 115, 22, 0.55);
-    transition: all 0.25s ease;
+    border: 2px solid #1A2744;
+    box-shadow: 4px 4px 0 rgba(26, 39, 68, 0.15);
+    transition: all 0.2s ease;
   }
   .upstep-orange-btn:hover {
+    background: #2a3a5c;
     transform: translateY(-1px);
-    box-shadow: 0 12px 28px -6px rgba(249, 115, 22, 0.7);
+    box-shadow: 6px 6px 0 rgba(26, 39, 68, 0.2);
+  }
+  .kid-cta-btn {
+    background: #FF6B6B;
+    color: white;
+    border: 2px solid #1A2744;
+    box-shadow: 4px 4px 0 #1A2744;
+    transition: all 0.2s ease;
+  }
+  .kid-cta-btn:hover {
+    background: #E55A5A;
+    transform: translateY(-1px);
+    box-shadow: 5px 5px 0 #1A2744;
+  }
+  .kid-cta-btn:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0 #1A2744;
+  }
+  .kid-card {
+    background: white;
+    border: 2.5px solid #1A2744;
+    box-shadow: 6px 6px 0 #1A2744;
+    border-radius: 20px;
+  }
+  .kid-badge {
+    background: #FFD23F;
+    border: 2px solid #1A2744;
+    box-shadow: 3px 3px 0 #1A2744;
   }
   .upstep-section-underline {
     position: relative;
@@ -161,10 +203,19 @@
     width: 80px;
     height: 4px;
     border-radius: 9999px;
-    background: linear-gradient(90deg, #ff8c42, #f97316);
+    background: linear-gradient(90deg, #FFD23F, #FF6B6B, #A78BFA);
   }
   .upstep-wave-divider {
     position: relative;
+  }
+  /* Fun confetti dots */
+  .kid-confetti {
+    background-image: radial-gradient(circle, #FFD23F 2px, transparent 2.5px),
+      radial-gradient(circle, #FF6B6B 2px, transparent 2.5px),
+      radial-gradient(circle, #06D6A0 2px, transparent 2.5px),
+      radial-gradient(circle, #A78BFA 2px, transparent 2.5px);
+    background-size: 28px 28px;
+    background-position: 0 0, 14px 14px, 7px 7px, 21px 21px;
   }
 }
 
@@ -211,3 +262,14 @@
   background-image: radial-gradient(currentColor 1.5px, transparent 1.5px);
   background-size: 18px 18px;
 }
+/* Bouncy kid animations */
+@keyframes kid-wiggle {
+  0%, 100% { transform: rotate(-1deg) scale(1); }
+  50% { transform: rotate(1deg) scale(1.02); }
+}
+.kid-wiggle { animation: kid-wiggle 3s ease-in-out infinite; }
+@keyframes kid-float-rotate {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+.kid-float-rotate { animation: kid-float-rotate 5s ease-in-out infinite; }

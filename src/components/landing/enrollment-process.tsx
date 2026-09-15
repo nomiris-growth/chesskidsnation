@@ -3,29 +3,29 @@ import { CalendarCheck, ClipboardList, PhoneCall, GraduationCap } from "lucide-r
 const steps = [
   {
     icon: CalendarCheck,
-    title: "Demo Class",
-    desc: "Book a free 20-minute live 1-on-1 session to experience our teaching format.",
+    title: "Demo",
+    desc: "A warm, 20-minute 1-on-1 - your child tries a real class and you see how we teach.",
     color: "#f97316",
     bg: "bg-orange-50",
   },
   {
     icon: ClipboardList,
-    title: "Level Assessment",
-    desc: "Our coaches assess your child's chess level to recommend the right starting point.",
+    title: "Quick Level Check",
+    desc: "A friendly coach sees what your child already knows, so we start at the right place - not too easy, not too hard.",
     color: "#0ea5e9",
     bg: "bg-sky-50",
   },
   {
     icon: PhoneCall,
-    title: "Counselling Session",
-    desc: "A dedicated counsellor walks you through the curriculum, schedule, and pricing.",
+    title: "Chat With Us",
+    desc: "We talk through batches, timings, and fees in plain words - and answer every question you have.",
     color: "#8b5cf6",
     bg: "bg-violet-50",
   },
   {
     icon: GraduationCap,
-    title: "Enrolment",
-    desc: "Confirm your slot, choose your batch, and your child's chess journey begins!",
+    title: "Start Learning",
+    desc: "Pick your batch and begin - your child’s first small win is just a week away.",
     color: "#10b981",
     bg: "bg-emerald-50",
   },
@@ -41,8 +41,7 @@ export function EnrollmentProcess() {
             Enrolment Process
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-sm text-slate-600 md:text-[15px]">
-            From your first demo to enrolment, our four-step journey keeps things
-            simple, transparent and supportive.
+            From first hello to first class - four tiny steps, and we guide you at each one. No confusion, no rush.
           </p>
         </div>
 

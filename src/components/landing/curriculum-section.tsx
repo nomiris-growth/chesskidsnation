@@ -40,35 +40,35 @@ export function CurriculumSection() {
         <div>
           <div className="mb-3 h-1 w-12 rounded-full bg-orange-500" />
           <h2 className="text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl lg:text-[34px]">
-            Scientifically Developed &amp; Structured Curriculum
+            A Simple, Step-by-Step Way to Learn Chess
           </h2>
           <div className="mt-4 h-px w-full max-w-md bg-slate-200" />
 
           <p className="mt-6 text-[15px] leading-relaxed text-slate-700">
-            With years of experience, feedback, and proven results, we have
-            meticulously developed a structured curriculum consisting of{" "}
+            We built this with care -{" "}
             <span className="font-bold text-slate-900">
-              five foundation levels
+              five easy foundation levels
             </span>{" "}
-            followed by{" "}
-            <span className="font-bold text-slate-900">Master Level training</span>.
+            and then{" "}
+            <span className="font-bold text-slate-900">Master Level</span> for kids
+            who want to go further. Each step feels doable and fun.
           </p>
 
           <p className="mt-4 text-[15px] leading-relaxed text-slate-700">
-            Even a child who completes just the{" "}
-            <span className="font-bold text-slate-900">first course</span> in our
-            curriculum will have a{" "}
+            Even after just the{" "}
+            <span className="font-bold text-slate-900">first course</span>, your
+            child will understand chess{" "}
             <span className="font-bold text-slate-900">
-              stronger grasp of chess than an average adult
+              better than most adults who play casually
             </span>{" "}
-            who plays it as a hobby with family and friends.
+            at home.
           </p>
 
           <a
             href="#book-demo"
-            className="upstep-orange-btn mt-7 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-extrabold uppercase tracking-wide"
+            className="kid-cta-btn mt-7 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide"
           >
-            Book a FREE Demo Class
+            Book a Demo Class
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -149,9 +149,12 @@ export function CurriculumSection() {
       {/* Sub-heading for next section */}
       <div className="relative mt-16 text-center">
         <h2 className="text-2xl font-extrabold text-slate-900 sm:text-3xl lg:text-[34px]">
-          Inspiring Journeys of Our Students, One Move at a Time
+          Little Wins, Big Smiles - One Move at a Time
         </h2>
-        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-orange-500" />
+        <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600">
+          Real children, real progress - see how a little chess each week builds confidence at home and in school.
+        </p>
+        <div className="mx-auto mt-3 h-1 w-20 rounded-full bg-[#FFD23F]" />
       </div>
     </section>
   );

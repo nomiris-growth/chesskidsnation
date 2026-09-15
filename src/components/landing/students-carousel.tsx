@@ -18,7 +18,7 @@ const students: Student[] = [
     name: "Kiet",
     location: "Rising Star",
     heading: "+310 FIDE Rating Leap in 7 Months",
-    body: "A dedicated and fearless competitor, 13-year-old Kiet has shown phenomenal progress by climbing from 1655 in January 2025 to 1965 by August 2025 — a massive +310 FIDE Classical rating jump!",
+    body: "A dedicated and fearless competitor, 13-year-old Kiet has shown phenomenal progress by climbing from 1655 in January 2025 to 1965 by August 2025 - a massive +310 FIDE Classical rating jump!",
     bullets: [
       "Secured +258 rating points in just 4 months (April–August 2025), reflecting consistency and fearless play against stronger opposition.",
       "Demonstrated relentless dedication through regular tournament participation and steady training.",
@@ -33,7 +33,7 @@ const students: Student[] = [
     heading: "FIDE-Rated in Classical, Rapid & Blitz",
     body: "A prodigious talent, Reyaansh is making waves in the chess world with his extraordinary achievements at just 11 years old!",
     bullets: [
-      "Holds FIDE ratings in all three formats — Classical, Rapid, and Blitz.",
+      "Holds FIDE ratings in all three formats - Classical, Rapid, and Blitz.",
       "Among the few Under-7 players in the world to hold such a distinction as of February 2025.",
       "Aims for international recognition with steady tournament success.",
     ],

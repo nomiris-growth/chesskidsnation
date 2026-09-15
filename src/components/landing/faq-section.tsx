@@ -10,27 +10,27 @@ import {
 const faqs = [
   {
     q: "Will my child get a certificate?",
-    a: "Yes! Your child will earn a Level Completion Certificate with each level, signed and inspired by GM Viswanathan Anand, the 5-time World Chess Champion.",
+    a: "Yes! At the end of each level your child earns a bright, shareable completion certificate - a small, happy win that keeps them motivated for the next step.",
   },
   {
-    q: "What do we need to start online classes?",
-    a: "All you need is: A Device (Laptop | Desktop | Tablet | Smart Phone), willingness to learn & play, and a good internet connection. Chess is one of the few sports that can be learnt online and offline equally well with guided training, practice and analysis.",
+    q: "What do we need to start?",
+    a: "Just three things: a phone, tablet or laptop, a willingness to play and learn, and decent internet. That's it - our coaches guide the rest, step by step.",
   },
   {
-    q: "Why should kids learn Chess?",
-    a: "Chess is the 21st-century skill: learning chess will help your child in Improving Math, Logical thinking, Strategic thinking, Pattern Recognition, Quick Response Time, Building Confidence, Decision making, Reducing Anxiety, Planning & Problem Solving, and Increasing Self Awareness.",
+    q: "Why should my child learn chess?",
+    a: "In simple words: chess helps kids focus, think clearly, be patient, and feel confident. You may notice better attention in homework, calmer decisions, and a proud smile after each small win.",
   },
   {
-    q: "Can I take a break between classes?",
-    a: "Yes! Our levels are very well structured, which allows you to take a small break and then start from exactly where you stopped. You can even switch between formats — e.g., from private one-on-one to group classes — and also change frequency.",
+    q: "Can we pause and restart later?",
+    a: "Yes, easily. Our levels pick up right where you left off. You can also switch between group and 1-on-1, or change how many classes per week - we keep it flexible.",
   },
   {
-    q: "Who will teach?",
-    a: "All our coaches are certified, well-trained and experienced. For different levels we have different coaches. For beginner levels, coaches are trained to make chess fun and engaging for kids. For higher levels, when kids participate in national and international tournaments, we even have International Masters (IMs) and Grand Masters (GMs) training our students.",
+    q: "Who will teach my child?",
+    a: "Kind, patient, and well-trained coaches - gentle and playful for beginners, and more advanced guidance (including IM/GM support) as your child grows and plays in tournaments.",
   },
   {
-    q: "What are the timings and days of classes?",
-    a: "Batch timings are flexible — not just for private classes but also for group classes. We have a lot of options for days, formats and time. Our team will share the best options based on your schedule and time zone.",
+    q: "When are the classes?",
+    a: "We offer many batch times for group and private lessons. Just tell us your routine and time zone, and we'll share the closest, most convenient options.",
   },
 ];
 

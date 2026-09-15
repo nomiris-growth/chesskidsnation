@@ -3,43 +3,43 @@ import { Sparkles, Puzzle, Brain, MemoryStick, Activity, Network } from "lucide-
 const benefits = [
   {
     icon: Sparkles,
-    title: "Chess Increases Creativity",
-    body: "Unleash your creative genius! Playing chess activates the brain's right hemisphere, sparking originality and imaginative problem-solving. A four-year study by Robert Ferguson involving students (grades 7 to 9) revealed that chess players showed the highest growth in originality compared to other activities.",
+    title: "More Creative Thinking",
+    body: "Chess gently nudges the imagination - kids learn to try new ideas and find clever moves. In a 4-year school study (grades 7–9), chess players showed the biggest jump in original thinking.",
     color: "#0d9488",
     bg: "bg-teal-500",
   },
   {
     icon: Puzzle,
-    title: "Increases Problem-Solving Skills",
-    body: "Life is full of challenges, and chess is the ultimate training ground for solving them. A 1992 New Brunswick (Canada) study split 450 students into three groups: Group A followed the standard math curriculum, Group B added chess instruction after first grade, and Group C started chess lessons from first grade alongside math. Remarkably, Group C's scores skyrocketed from 62% to 81.2%, outperforming Group A by 21.46%!",
+    title: "Better at Solving Problems",
+    body: "Chess gives kids safe practice in figuring things out. In a study of 450 students, the group that learned chess from grade 1 scored much higher in math (81% vs 62%) - because they got better at thinking step by step.",
     color: "#8b5cf6",
     bg: "bg-purple-500",
   },
   {
     icon: Brain,
-    title: "Exercises both sides of the brain",
-    body: "Think of chess as a full-brain workout that strengthens your mind from every angle. A German study compared the brain activity of chess experts and novices, revealing that experienced players activate both hemispheres to process patterns and calculate moves faster. This dual-brain engagement leads to improved logical reasoning, visual-spatial skills, and the ability to multitask effectively.",
+    title: "A Workout for the Whole Brain",
+    body: "Chess uses both sides of the brain together - to see patterns and plan ahead. With practice, kids get faster at reasoning, picturing moves, and juggling ideas.",
     color: "#0ea5e9",
     bg: "bg-sky-500",
   },
   {
     icon: MemoryStick,
-    title: "Chess Improves Memory",
-    body: "Do you often wish your child had a better memory or was more organized? Chess might be the answer! Studies have shown that chess players develop stronger memory skills, as the game requires them to remember moves, anticipate patterns, and plan strategies several steps ahead. A 1985 study demonstrated that students who played chess for two years improved their grades in all subjects and exhibited better memory and organizational skills, as observed by their teachers.",
+    title: "Stronger Memory, Neatly Organized",
+    body: "Remembering openings and planning a few moves ahead builds memory without pressure. Teachers in one study noticed that children who played chess for two years were neater and did better across subjects.",
     color: "#ec4899",
     bg: "bg-pink-500",
   },
   {
     icon: Activity,
-    title: "Chess Helps Manage ADHD Symptoms",
-    body: "For children struggling with focus and attention, chess can work wonders. A 2016 study revealed that chess helped children with ADHD reduce inattentiveness by 41%, as it requires sustained concentration and thoughtful decision-making. Parents of children with ADHD often notice significant improvements in their ability to focus for longer periods, stay calm under pressure, and develop self-discipline. By engaging in a structured and stimulating game like chess, children can channel their energy into something productive and rewarding.",
+    title: "Helps Kids Focus Longer",
+    body: "Chess invites calm focus - one move at a time. Some families notice their child can sit and concentrate longer, stay patient, and feel more in control. A small, steady practice with big everyday benefits.",
     color: "#f59e0b",
     bg: "bg-amber-500",
   },
   {
     icon: Network,
-    title: "Chess Promotes Brain Growth and Neural Connections",
-    body: "What if a simple game could physically grow your child's brain? Studies suggest that playing chess stimulates the growth of dendrites — branch-like structures in the brain that transmit information between neurons. When your child plays chess, they're essentially working out their brain. The result? An increase in the brain's ability to process and adapt to information. Over time, this enhanced brain activity leads to better decision-making, faster reflexes, and an improved ability to tackle complex challenges.",
+    title: "Builds Brain Connections",
+    body: "Think of it as brain exercise - each game strengthens the links that help kids decide quickly and adapt. Over weeks, you may see faster thinking and steadier confidence.",
     color: "#10b981",
     bg: "bg-emerald-500",
   },
@@ -54,12 +54,10 @@ export function ResearchSection() {
           <div>
             <div className="mb-3 h-1 w-12 rounded-full bg-orange-500" />
             <h2 className="text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl lg:text-[34px]">
-              Research Reveals Chess Can Boost Grades by Up to{" "}
-              <span className="text-orange-600">20%</span>!
+              Small Game, Big Growth - What Parents Notice Most
             </h2>
             <p className="mt-4 text-sm text-slate-600 md:text-[15px]">
-              Scroll through the other Research-Backed Benefits of Chess Beyond
-              the Board.
+              A quick look at why a little chess each week helps at school - and at home - explained in simple words.
             </p>
 
             {/* Brain illustration */}
