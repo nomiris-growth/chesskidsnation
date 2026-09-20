@@ -3,20 +3,63 @@
 import { useState } from "react";
 import { ChevronDown, Globe, Loader2, CheckCircle2 } from "lucide-react";
 
-const countryCodes = [
-  { code: "+91", label: "India (+91)" },
-  { code: "+1", label: "USA (+1)" },
-  { code: "+61", label: "Australia (+61)" },
-  { code: "+65", label: "Singapore (+65)" },
-  { code: "+44", label: "UK (+44)" },
-  { code: "+971", label: "UAE (+971)" },
+const USA_COUNTRY = { code: "+1", label: "USA (+1)" };
+
+const US_STATES = [
+  "Alabama",
+  "Alaska",
+  "Arizona",
+  "Arkansas",
+  "California",
+  "Colorado",
+  "Connecticut",
+  "Delaware",
+  "Florida",
+  "Georgia",
+  "Hawaii",
+  "Idaho",
+  "Illinois",
+  "Indiana",
+  "Iowa",
+  "Kansas",
+  "Kentucky",
+  "Louisiana",
+  "Maine",
+  "Maryland",
+  "Massachusetts",
+  "Michigan",
+  "Minnesota",
+  "Mississippi",
+  "Missouri",
+  "Montana",
+  "Nebraska",
+  "Nevada",
+  "New Hampshire",
+  "New Jersey",
+  "New Mexico",
+  "New York",
+  "North Carolina",
+  "North Dakota",
+  "Ohio",
+  "Oklahoma",
+  "Oregon",
+  "Pennsylvania",
+  "Rhode Island",
+  "South Carolina",
+  "South Dakota",
+  "Tennessee",
+  "Texas",
+  "Utah",
+  "Vermont",
+  "Virginia",
+  "Washington",
+  "West Virginia",
+  "Wisconsin",
+  "Wyoming",
+  "District of Columbia",
 ];
 
-const regions = ["India", "USA", "Australia", "Singapore", "UK", "UAE", "Other Countries"];
-
 export function DemoForm() {
-  const [countryOpen, setCountryOpen] = useState(false);
-  const [country, setCountry] = useState(countryCodes[0]);
   const [region, setRegion] = useState("");
   const [regionOpen, setRegionOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -31,8 +74,10 @@ export function DemoForm() {
     const e: Record<string, string> = {};
     if (!name.trim()) e.name = "Child's name is required";
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Valid email is required";
+    const digits = phone.replace(/\D/g, "");
     if (!phone.trim()) e.phone = "Mobile number is required";
-    if (!region) e.region = "Please select your region";
+    else if (digits.length !== 10) e.phone = "Enter a valid 10-digit US mobile number";
+    if (!region) e.region = "Please select your state";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -71,13 +116,18 @@ export function DemoForm() {
   }
 
   return (
-    <div
-      id="book-demo"
-      className="kid-card p-5 sm:p-7"
-    >
+    <div id="book-demo" className="kid-card p-5 sm:p-7">
+      <div className="flex justify-center">
+        <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#1A2744]/10 bg-[#FFFBEB] px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest text-slate-700">
+          <span aria-hidden>🇺🇸</span> USA only — For families in the United States
+        </div>
+      </div>
       <h3 className="text-center text-xl font-extrabold text-slate-900 sm:text-2xl">
         Fill in the details to book your Demo Session
       </h3>
+      <p className="mt-1 text-center text-xs font-medium text-slate-500">
+        Available in all 50 US states + D.C. — classes in US time zones
+      </p>
 
       <form onSubmit={onSubmit} noValidate className="mt-5 space-y-4">
         {/* Child name */}
@@ -106,49 +156,32 @@ export function DemoForm() {
           {errors.email && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.email}</p>}
         </div>
 
-        {/* Phone + country code */}
+        {/* Phone — USA only (+1 fixed) */}
         <div>
           <div className="flex gap-2">
-            <div className="relative w-[38%] sm:w-[36%]">
-              <button
-                type="button"
-                onClick={() => setCountryOpen((v) => !v)}
-                className="flex w-full items-center justify-between rounded-2xl border-2 border-slate-200 bg-white px-3 py-3 text-sm font-semibold text-slate-800 focus:border-[#7C3AED] focus:outline-none"
-              >
-                <span className="flex items-center gap-1.5">
-                  <Globe className="h-4 w-4 text-[#7C3AED]" />
-                  <span className="truncate">{country.code}</span>
-                </span>
-                <ChevronDown className={`h-4 w-4 shrink-0 text-slate-400 transition-transform ${countryOpen ? "rotate-180" : ""}`} />
-              </button>
-              {countryOpen && (
-                <div className="absolute left-0 right-0 top-full z-30 mt-1 max-h-56 overflow-y-auto rounded-xl border-2 border-slate-900 bg-white p-1 shadow-[4px_4px_0_#1A2744]">
-                  {countryCodes.map((c) => (
-                    <button
-                      key={c.code}
-                      type="button"
-                      onClick={() => {
-                        setCountry(c);
-                        setCountryOpen(false);
-                      }}
-                      className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-[#FFFBEB]"
-                    >
-                      {c.label}
-                    </button>
-                  ))}
-                </div>
-              )}
+            <div className="flex w-[38%] sm:w-[30%] items-center justify-center gap-1.5 rounded-2xl border-2 border-slate-200 bg-slate-50 px-3 py-3 text-sm font-bold text-slate-800">
+              <Globe className="h-4 w-4 text-[#7C3AED]" />
+              <span>{USA_COUNTRY.code}</span>
+              <span className="hidden sm:inline text-xs font-semibold text-slate-500">USA</span>
             </div>
             <input
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                // allow only digits, format-friendly but store raw; limit to 10 digits
+                const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+                // keep simple: store digits, display as entered digits (or formatted)
+                setPhone(digits);
+                if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
+              }}
               type="tel"
-              placeholder="Parent's Mobile *"
+              inputMode="numeric"
+              placeholder="Parent's Mobile (US) *"
               aria-invalid={!!errors.phone}
               className={`flex-1 rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.phone ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
             />
           </div>
           {errors.phone && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.phone}</p>}
+          <p className="mt-1 px-1 text-[11px] font-medium text-slate-500">US numbers only — 10 digits, no country code needed</p>
         </div>
 
         {/* City */}
@@ -160,7 +193,7 @@ export function DemoForm() {
           className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
         />
 
-        {/* Region */}
+        {/* State — USA only */}
         <div>
           <button
             type="button"
@@ -168,13 +201,13 @@ export function DemoForm() {
             aria-invalid={!!errors.region}
             className={`flex w-full items-center justify-between rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 ${errors.region ? "border-red-400 focus:border-red-400 focus:ring-red-100 text-slate-900" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
           >
-            <span className={region ? "text-slate-900" : "text-slate-400"}>{region || "Select Your Region *"}</span>
+            <span className={region ? "text-slate-900" : "text-slate-400"}>{region || "Select State *"}</span>
             <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${regionOpen ? "rotate-180" : ""}`} />
           </button>
           {errors.region && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.region}</p>}
           {regionOpen && (
             <div className="mt-1 max-h-56 overflow-y-auto rounded-xl border-2 border-slate-900 bg-white p-1 shadow-[4px_4px_0_#1A2744]">
-              {regions.map((r) => (
+              {US_STATES.map((r) => (
                 <button
                   key={r}
                   type="button"
