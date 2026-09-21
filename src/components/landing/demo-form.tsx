@@ -135,9 +135,9 @@ export function DemoForm() {
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#06D6A0] border-2 border-slate-900">
           <CheckCircle2 className="h-12 w-12 text-white" />
         </div>
-        <h3 className="mt-5 text-2xl font-black text-slate-900">
+        <h2 className="mt-5 text-2xl font-black text-slate-900">
           You&apos;re all set! 🎉
-        </h3>
+        </h2>
         <p className="mt-2 max-w-xs text-sm font-medium text-slate-600">
           Thank you for booking your demo class. Our team will reach out
           shortly to confirm your slot.
@@ -159,9 +159,9 @@ export function DemoForm() {
           <span aria-hidden>🇺🇸</span> USA only — For families in the United States
         </div>
       </div>
-      <h3 className="text-center text-xl font-extrabold text-slate-900 sm:text-2xl">
+      <h2 className="text-center text-xl font-extrabold text-slate-900 sm:text-2xl">
         Fill in the details to book your Demo Session
-      </h3>
+      </h2>
       <p className="mt-1 text-center text-xs font-medium text-slate-500">
         Available in all 50 US states + D.C. — classes in US time zones
       </p>
@@ -173,9 +173,10 @@ export function DemoForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             type="text"
+            autoComplete="name"
             placeholder="Child's Full Name *"
             aria-invalid={!!errors.name}
-            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.name ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 sm:py-3 sm:text-sm ${errors.name ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
           />
           {errors.name && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.name}</p>}
         </div>
@@ -186,9 +187,10 @@ export function DemoForm() {
             value={parentName}
             onChange={(e) => setParentName(e.target.value)}
             type="text"
+            autoComplete="name"
             placeholder="Parent's Name *"
             aria-invalid={!!errors.parentName}
-            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.parentName ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 sm:py-3 sm:text-sm ${errors.parentName ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
           />
           {errors.parentName && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.parentName}</p>}
         </div>
@@ -199,9 +201,10 @@ export function DemoForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
+            autoComplete="email"
             placeholder="Parent's Email ID *"
             aria-invalid={!!errors.email}
-            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.email ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 sm:py-3 sm:text-sm ${errors.email ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
           />
           {errors.email && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.email}</p>}
         </div>
@@ -209,7 +212,7 @@ export function DemoForm() {
         {/* Phone — USA only (+1 fixed) */}
         <div>
           <div className="flex gap-2">
-            <div className="flex w-[38%] sm:w-[30%] items-center justify-center gap-1.5 rounded-2xl border-2 border-slate-200 bg-slate-50 px-3 py-3 text-sm font-bold text-slate-800">
+            <div className="flex w-[96px] shrink-0 items-center justify-center gap-1.5 rounded-2xl border-2 border-slate-200 bg-slate-50 px-3 py-3.5 text-[16px] font-bold text-slate-800 sm:w-[30%] sm:py-3 sm:text-sm">
               <Globe className="h-4 w-4 text-[#7C3AED]" />
               <span>{USA_COUNTRY.code}</span>
               <span className="hidden sm:inline text-xs font-semibold text-slate-500">USA</span>
@@ -217,17 +220,16 @@ export function DemoForm() {
             <input
               value={phone}
               onChange={(e) => {
-                // allow only digits, format-friendly but store raw; limit to 10 digits
                 const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
-                // keep simple: store digits, display as entered digits (or formatted)
                 setPhone(digits);
                 if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
               }}
               type="tel"
               inputMode="numeric"
+              autoComplete="tel"
               placeholder="Parent's Mobile (US) *"
               aria-invalid={!!errors.phone}
-              className={`flex-1 rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.phone ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+              className={`flex-1 rounded-2xl border-2 bg-white px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 sm:py-3 sm:text-sm ${errors.phone ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
             />
           </div>
           {errors.phone && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.phone}</p>}
@@ -239,8 +241,9 @@ export function DemoForm() {
           value={city}
           onChange={(e) => setCity(e.target.value)}
           type="text"
+          autoComplete="address-level2"
           placeholder="City"
-          className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
+          className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40 sm:py-3 sm:text-sm"
         />
 
         {/* Message — relevant, optional */}
@@ -250,7 +253,7 @@ export function DemoForm() {
             onChange={(e) => setMessage(e.target.value)}
             rows={3}
             placeholder="Message (optional) — child's age, chess level, preferred demo time..."
-            className="w-full resize-none rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
+            className="w-full resize-none rounded-2xl border-2 border-slate-200 bg-white px-4 py-3.5 text-[16px] font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40 sm:py-3 sm:text-sm"
           />
           <p className="mt-1 px-1 text-[11px] font-medium text-slate-500">
             e.g. &quot;8 years old, beginner, weekday evenings EST work best&quot;

@@ -64,12 +64,12 @@ function StatItem({ value, suffix, label }: { value: number | string; suffix: st
     <div className="flex flex-col items-center text-center">
       <span
         ref={ref}
-        className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
+        className="text-[26px] font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
       >
         {v.toLocaleString()}
         <span className="text-orange-200">{suffix}</span>
       </span>
-      <span className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-orange-100 sm:text-xs">
+      <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-orange-100 sm:mt-1.5 sm:text-xs">
         {label}
       </span>
     </div>
@@ -107,9 +107,9 @@ export function StatsSection() {
       <div className="dot-grid pointer-events-none absolute right-[5%] top-10 h-32 w-32 text-white/15" />
       <div className="pointer-events-none absolute -left-20 bottom-0 h-60 w-60 rounded-full bg-orange-400/40 blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+      <div className="relative mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-16">
         {/* Stats row */}
-        <div className="grid grid-cols-2 gap-6 border-b border-white/20 pb-10 sm:grid-cols-4 sm:gap-4">
+        <div className="grid grid-cols-2 gap-4 border-b border-white/20 pb-8 sm:grid-cols-4 sm:gap-4 sm:pb-10">
           {stats.map((s) => (
             <StatItem key={s.label} {...s} />
           ))}
@@ -119,10 +119,10 @@ export function StatsSection() {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {/* Card 1: Demo requirements */}
           <div className="rounded-3xl bg-white p-6 text-slate-900 shadow-xl sm:p-8">
-            <h3 className="relative inline-block text-xl font-extrabold text-slate-900 sm:text-2xl">
+            <h2 className="relative inline-block text-xl font-extrabold text-slate-900 sm:text-2xl">
               For Your Demo, Just Bring
               <span className="absolute -bottom-2 left-0 h-[3px] w-24 rounded-full bg-[#FFD23F]" />
-            </h3>
+            </h2>
 
             <div className="mt-6 space-y-4">
               {demoRequirements.map(({ icon: Icon, title, sub }) => (
@@ -154,10 +154,10 @@ export function StatsSection() {
             {/* Decorative dotted wave */}
             <div className="pointer-events-none absolute right-3 top-3 h-20 w-20 rounded-full border-2 border-dashed border-orange-200" />
 
-            <h3 className="relative inline-block text-xl font-extrabold text-slate-900 sm:text-2xl">
+            <h2 className="relative inline-block text-xl font-extrabold text-slate-900 sm:text-2xl">
               Chess Helps in Real Life, Too
               <span className="absolute -bottom-2 left-0 h-[3px] w-24 rounded-full bg-[#FFD23F]" />
-            </h3>
+            </h2>
 
             <p className="mt-6 text-[15px] font-semibold leading-relaxed text-slate-700">
               Chess quietly builds skills kids use every day -{" "}

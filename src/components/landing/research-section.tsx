@@ -47,10 +47,10 @@ const benefits = [
 
 export function ResearchSection() {
   return (
-    <section className="bg-white py-14 md:py-20">
+    <section className="bg-white py-10 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Header */}
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-2">
           <div>
             <div className="mb-3 h-1 w-12 rounded-full bg-orange-500" />
             <h2 className="text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl lg:text-[34px]">

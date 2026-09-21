@@ -36,7 +36,7 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section className="bg-slate-100 py-14 md:py-20">
+    <section className="bg-slate-100 py-10 md:py-20">
       <div className="mx-auto max-w-3xl px-4 md:px-6">
         <div className="text-center">
           <h2 className="upstep-section-underline text-2xl font-extrabold text-slate-900 sm:text-3xl lg:text-[34px]">

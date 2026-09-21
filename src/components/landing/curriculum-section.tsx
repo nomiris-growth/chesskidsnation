@@ -35,7 +35,7 @@ export function CurriculumSection() {
       <div className="pointer-events-none absolute -left-20 top-20 h-72 w-72 rounded-full bg-pink-100/60 blur-3xl" />
       <div className="pointer-events-none absolute -right-20 bottom-10 h-80 w-80 rounded-full bg-blue-100/60 blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-6 lg:grid-cols-2">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 sm:gap-12 md:px-6 lg:grid-cols-2">
         {/* Left: text */}
         <div>
           <div className="mb-3 h-1 w-12 rounded-full bg-orange-500" />
@@ -73,8 +73,8 @@ export function CurriculumSection() {
           </a>
         </div>
 
-        {/* Right: circular curriculum diagram */}
-        <div className="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center">
+        {/* Right: circular curriculum diagram — smaller on mobile for better viewport */}
+        <div className="relative mx-auto flex aspect-square w-full max-w-[300px] items-center justify-center sm:max-w-md">
           {/* Dashed outer circle */}
           <div className="upstep-spin-reverse-slow absolute inset-0 rounded-full border-2 border-dashed border-slate-300" />
           {/* Solid ring */}

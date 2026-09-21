@@ -33,7 +33,7 @@ const steps = [
 
 export function EnrollmentProcess() {
   return (
-    <section className="bg-white py-14 md:py-20">
+    <section className="bg-white py-10 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Header */}
         <div className="text-center">
