@@ -5,6 +5,43 @@ import { Globe, Loader2, CheckCircle2 } from "lucide-react";
 
 const USA_COUNTRY = { code: "+1", label: "USA (+1)" };
 
+const WEBHOOK_URL = "https://n8n.nomiris.com/webhook/ChessKidsNation";
+
+function getTrackingData() {
+  if (typeof window === "undefined") return {};
+  const params = new URLSearchParams(window.location.search);
+  const tracking: Record<string, string> = {};
+  // UTM + click ids
+  const keys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "utm_id",
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "fbclid",
+    "msclkid",
+    "ttclid",
+    "li_fat_id",
+  ];
+  for (const k of keys) {
+    const v = params.get(k);
+    if (v) tracking[k] = v;
+  }
+  // also capture any other query params for debugging
+  tracking["page_url"] = window.location.href;
+  tracking["referrer"] = document.referrer || "";
+  tracking["user_agent"] = navigator.userAgent || "";
+  tracking["language"] = navigator.language || "";
+  tracking["timezone"] = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  tracking["screen_resolution"] = `${window.screen.width}x${window.screen.height}`;
+  tracking["viewport_size"] = `${window.innerWidth}x${window.innerHeight}`;
+  return tracking;
+}
+
 export function DemoForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -15,6 +52,7 @@ export function DemoForm() {
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -28,14 +66,67 @@ export function DemoForm() {
     return Object.keys(e).length === 0;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    setSubmitError(null);
+
+    const digits = phone.replace(/\D/g, "");
+    const tracking = getTrackingData();
+
+    const payload = {
+      // form fields
+      child_name: name.trim(),
+      parent_name: parentName.trim(),
+      parent_email: email.trim(),
+      phone: digits,
+      phone_full: `${USA_COUNTRY.code}${digits}`,
+      country_code: USA_COUNTRY.code,
+      country: "USA",
+      city: city.trim(),
+      message: message.trim(),
+      // campaign context
+      campaign: "USA-only",
+      brand: "ChessKidsNation",
+      form_id: "book-demo",
+      // extra info we can send
+      submitted_at: new Date().toISOString(),
+      ...tracking,
+      // flat UTM fields also top-level for n8n filtering
+      utm_source: tracking["utm_source"] || "",
+      utm_medium: tracking["utm_medium"] || "",
+      utm_campaign: tracking["utm_campaign"] || "",
+      utm_term: tracking["utm_term"] || "",
+      utm_content: tracking["utm_content"] || "",
+      gclid: tracking["gclid"] || "",
+      fbclid: tracking["fbclid"] || "",
+    };
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`Webhook failed: ${res.status}`);
+      // fire GTM / dataLayer event for conversion tracking
+      if (typeof window !== "undefined") {
+        const w = window as unknown as { dataLayer?: unknown[] };
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({
+          event: "generate_lead",
+          form: "book-demo",
+          ...payload,
+        });
+      }
       setSubmitted(true);
-    }, 1100);
+    } catch (err) {
+      console.error(err);
+      setSubmitError("Something went wrong. Please try again or WhatsApp us.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -165,6 +256,12 @@ export function DemoForm() {
             e.g. &quot;8 years old, beginner, weekday evenings EST work best&quot;
           </p>
         </div>
+
+        {submitError && (
+          <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600">
+            {submitError}
+          </p>
+        )}
 
         <button
           type="submit"
