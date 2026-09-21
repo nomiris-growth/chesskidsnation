@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Laptop, Brain, Globe, Users, Clock } from "lucide-react";
 
 const stats = [
-  { value: 18159, suffix: "+", label: "Students Trained" },
-  { value: 271082, suffix: "+", label: "Live Sessions Delivered" },
-  { value: 10, suffix: "+", label: "Countries Trust Us" },
-  { value: 116, suffix: "+", label: "Online Tournaments Conducted" },
+  { value: 5500, suffix: "+", label: "Students Trained" },
+  { value: 35000, suffix: "+", label: "Live Sessions Delivered" },
+  { value: "USA & Canada", suffix: "", label: "Only These Countries" },
+  { value: 20, suffix: "+", label: "Years Coaching Experience" },
 ];
 
 function useCountUp(target: number, durationMs = 1800) {
@@ -41,8 +41,25 @@ function useCountUp(target: number, durationMs = 1800) {
   return { value, ref };
 }
 
-function StatItem({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const { value: v, ref } = useCountUp(value);
+function StatItem({ value, suffix, label }: { value: number | string; suffix: string; label: string }) {
+  const isNumeric = typeof value === "number";
+  const { value: v, ref } = useCountUp(isNumeric ? (value as number) : 0);
+
+  // Non-numeric stat (e.g. "USA & Canada") — render without animation, smaller font to fit
+  if (!isNumeric) {
+    return (
+      <div className="flex flex-col items-center text-center">
+        <span className="text-xl font-extrabold tracking-tight text-white sm:text-2xl lg:text-[28px] leading-tight">
+          {value as string}
+          {suffix ? <span className="text-orange-200">{suffix}</span> : null}
+        </span>
+        <span className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-orange-100 sm:text-xs">
+          {label}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center text-center">
       <span
