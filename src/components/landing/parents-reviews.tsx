@@ -4,64 +4,28 @@ import { Star } from "lucide-react";
 
 const reviews = [
   {
-    name: "Keerthana",
-    initial: "K",
-    color: "#f97316",
-    text: "We have had a great experience with both the RM and the coach. We could see drastic improvement in our child's performance. The RM was very approachable and clarified all our doubts.",
-  },
-  {
-    name: "Kavita Reddy",
-    initial: "K",
-    color: "#0ea5e9",
-    text: "Sanjana teaches very well. Patiently, strictly and has fun also. My child likes her teaching style easy to understand. Keep it up!",
-  },
-  {
-    name: "Mallesh Tati",
-    initial: "M",
-    color: "#8b5cf6",
-    text: "Knowledge and skills development have been explained from minimal step to outer core world! Classes are worth rather than solo practice!!",
-  },
-  {
-    name: "Sawan Verma",
+    name: "Sarva",
     initial: "S",
-    color: "#10b981",
-    text: "We are happy to see the improvement n growing interest in chess for my son Ayansh Verma. Thanks to the coach Priyasivadharsini and ChessKidsNation.",
-  },
-  {
-    name: "Tenneti Poornima",
-    initial: "T",
-    color: "#ec4899",
-    text: "I strongly recommend ChessKidsNation and tutor Mr Prasad Harendra. I'm grateful to the team especially RM Mr Anthony, he is easily accessible on WhatsApp and flexible in changing the schedules.",
-  },
-  {
-    name: "Deepthi Kantheti",
-    initial: "D",
-    color: "#f59e0b",
-    text: "Coach is very passionate, talented, friendly, caring, funny and committed and the training is tailored to the kid's needs to be successful. I would highly recommend.",
-  },
-  {
-    name: "Anthony Kumar",
-    initial: "A",
-    color: "#0284c7",
-    text: "I am based in Hong Kong and I highly recommend ChessKidsNation for their excellent courses and training methodology. My son Jaiden has greatly benefited. N Shankar (RM) is superb.",
-  },
-  {
-    name: "Kanimozhi Sekaran",
-    initial: "K",
-    color: "#dc2626",
-    text: "Excellent chess class for all players! The lessons are well structured and focus on improving strategy, tactics, opening principles, and endgame techniques. Highly recommended.",
-  },
-  {
-    name: "Yukti Shah",
-    initial: "Y",
     color: "#7c3aed",
-    text: "This is a great place to learn chess. The coach we have is very nice and skilled. My child has learnt a lot since he has joined. Our RM, Deepak is also very prompt and supportive.",
+    text: "My child has had a very positive experience with ChessKidsNation. The coaches are supportive and encouraging, and the program has helped develop his strategic thinking, patience, and love for chess.",
   },
   {
-    name: "Sanket Gupta",
+    name: "Eshan",
+    initial: "E",
+    color: "#0ea5e9",
+    text: "It's an amazing experience for my child. My child attends classes virtually, but when I met the coaches in person during tournaments, I was very impressed by how attentive they are to every child. They make sure each kid receives equal attention and encouragement. The coaches are very patient. I have seen great improvement in my child's focus, confidence, and problem-solving skills. We are very happy to be part of ChessKidsNation and highly recommend it to other parents.",
+  },
+  {
+    name: "Shanvith",
     initial: "S",
-    color: "#16a34a",
-    text: "We are extremely happy with the ChessKidsNation online chess classes. Our coach has been incredibly patient, encouraging, and knows exactly how to keep young children engaged.",
+    color: "#f97316",
+    text: "Our child has had a wonderful experience with ChessKidsNation. The program makes learning chess fun while also helping kids develop focus, patience, and strategic thinking. The coaches (specifically coach Tejas) are supportive and explain concepts in a way that children can easily understand and enjoy. Since joining, we've noticed a great improvement in our child's confidence and problem-solving skills. We truly appreciate the positive and encouraging environment that ChessKidsNation provides for young learners.",
+  },
+  {
+    name: "Zohair Ajani",
+    initial: "Z",
+    color: "#10b981",
+    text: "ChessKidsNation has played a huge role in developing Zohair's strategic thinking, discipline, and love for the game. Over the past several years, the coaching and supportive environment have helped him grow tremendously as a player, culminating in major tournament successes. We truly appreciate the dedication of the coaches and the positive influence they have had on young players.",
   },
 ];
 
