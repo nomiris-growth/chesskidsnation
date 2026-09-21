@@ -1,6 +1,6 @@
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-[#FFFBEB] py-12 md:py-16">
+    <section className="relative overflow-hidden bg-[#FFFBEB] py-10 md:py-16">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-20 top-10 h-64 w-64 rounded-full bg-[#FFD23F]/20 blur-3xl" />
         <div className="absolute -right-20 bottom-10 h-64 w-64 rounded-full bg-[#7C3AED]/15 blur-3xl" />

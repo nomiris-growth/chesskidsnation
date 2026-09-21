@@ -165,13 +165,14 @@
   }
   .kid-cta-btn {
     background: #FF6B6B;
-    color: white;
+    color: #1A2744;
     border: 2px solid #1A2744;
     box-shadow: 4px 4px 0 #1A2744;
     transition: all 0.2s ease;
   }
   .kid-cta-btn:hover {
     background: #E55A5A;
+    color: #1A2744;
     transform: translateY(-1px);
     box-shadow: 5px 5px 0 #1A2744;
   }

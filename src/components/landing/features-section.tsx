@@ -64,7 +64,7 @@ const extraCard = {
 
 export function FeaturesSection() {
   return (
-    <section id="about" className="relative bg-white py-14 md:py-20">
+    <section id="about" className="relative bg-white py-10 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Header */}
         <div className="text-center">
@@ -88,8 +88,11 @@ export function FeaturesSection() {
                 <img
                   src={f.image}
                   alt={f.title}
-                  className="h-28 w-28 object-contain transition-transform duration-500 group-hover:scale-110"
+                  width={112}
+                  height={112}
                   loading="lazy"
+                  decoding="async"
+                  className="h-28 w-28 object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
 

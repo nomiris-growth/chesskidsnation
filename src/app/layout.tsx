@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Poppins, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "700", "800", "900"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -65,6 +60,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Preconnect for performance — most impactful for LCP/CLS */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://www.upstepacademy.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
@@ -76,7 +78,7 @@ export default function RootLayout({
         {/* End Google Tag Manager */}
       </head>
       <body
-        className={`${poppins.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${poppins.variable} antialiased bg-background text-foreground`}
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>

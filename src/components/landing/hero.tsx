@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { DemoForm } from "./demo-form";
 import { Clock, Trophy, BookOpen, Award, Users, Star, Play, ChevronDown } from "lucide-react";
+
+const YOUTUBE_ID = "Urx2nBbI0-U";
 
 const highlights = [
   { icon: Clock, text: "Successfully completed 30,000+ hours of training students since 2005.", color: "#FFD23F" },
@@ -17,21 +22,22 @@ const feesInclude = [
 ];
 
 export function Hero() {
+  const [videoReady, setVideoReady] = useState(false);
   return (
     <section className="relative overflow-hidden bg-[#FFFBEB] text-slate-900">
-      {/* --- Fun background doodles --- */}
+      {/* --- Fun background doodles — reduced on mobile for performance */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-24 -top-24 h-[420px] w-[520px] rounded-[60px] bg-[#FFD23F]/25 blur-3xl" />
-        <div className="absolute -right-32 top-[20%] h-[360px] w-[360px] rounded-full bg-[#A78BFA]/20 blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 h-[340px] w-[700px] rounded-[80px] bg-[#06D6A0]/12 blur-3xl" />
-        {/* subtle floating pieces - kept away from headline */}
-        <div className="kid-float-rotate absolute left-[5%] top-[32%] text-2xl opacity-[0.18]">♞</div>
-        <div className="kid-float-rotate absolute right-[6%] top-[38%] text-2xl opacity-[0.16]" style={{ animationDelay: "1s" }}>♝</div>
-        <div className="upstep-float absolute left-[10%] bottom-[20%] text-[#FFD23F] opacity-50">★</div>
-        <div className="upstep-float-slow absolute right-[10%] bottom-[16%] text-[#FF6B6B] text-lg opacity-40">✦</div>
-        <div className="kid-confetti absolute right-[4%] top-[52%] h-20 w-20 opacity-15" />
-        <div className="absolute left-[6%] bottom-[10%] h-20 w-20 rounded-full border-2 border-slate-900/8" />
-        <div className="absolute right-[8%] top-[62%] h-28 w-28 rounded-full border-2 border-dashed border-slate-900/8" />
+        <div className="absolute -right-32 top-[20%] hidden h-[360px] w-[360px] rounded-full bg-[#A78BFA]/20 blur-3xl sm:block" />
+        <div className="absolute bottom-0 left-1/4 hidden h-[340px] w-[700px] rounded-[80px] bg-[#06D6A0]/12 blur-3xl sm:block" />
+        {/* subtle floating pieces - kept away from headline, hide on very small to reduce paint */}
+        <div className="kid-float-rotate absolute left-[5%] top-[32%] hidden text-2xl opacity-[0.18] sm:block">♞</div>
+        <div className="kid-float-rotate absolute right-[6%] top-[38%] hidden text-2xl opacity-[0.16] sm:block" style={{ animationDelay: "1s" }}>♝</div>
+        <div className="upstep-float absolute left-[10%] bottom-[20%] hidden text-[#FFD23F] opacity-50 sm:block">★</div>
+        <div className="upstep-float-slow absolute right-[10%] bottom-[16%] hidden text-[#FF6B6B] text-lg opacity-40 sm:block">✦</div>
+        <div className="kid-confetti absolute right-[4%] top-[52%] hidden h-20 w-20 opacity-15 sm:block" />
+        <div className="absolute left-[6%] bottom-[10%] hidden h-20 w-20 rounded-full border-2 border-slate-900/8 sm:block" />
+        <div className="absolute right-[8%] top-[62%] hidden h-28 w-28 rounded-full border-2 border-dashed border-slate-900/8 sm:block" />
       </div>
 
       {/* --- Content - single column VSL --- */}
@@ -44,7 +50,7 @@ export function Hero() {
         </div>
 
         {/* Headline - centered, no overlap */}
-        <h1 className="mx-auto mt-5 max-w-3xl text-center text-[30px] font-black leading-[1.08] sm:text-[38px] lg:text-[44px]">
+        <h1 className="mx-auto mt-5 max-w-3xl text-center text-[26px] font-black leading-[1.08] sm:text-[38px] lg:text-[44px]">
           <span className="block">Make the</span>
           <span className="relative inline-block px-1">
             <span className="bg-gradient-to-r from-[#7C3AED] to-[#FF6B6B] bg-clip-text text-transparent">
@@ -64,45 +70,69 @@ export function Hero() {
           </span>
         </h1>
 
-        <p className="mx-auto mt-4 max-w-2xl text-center text-[15px] font-medium leading-relaxed text-slate-600">
+        <p className="mx-auto mt-4 max-w-2xl text-center text-[14px] font-medium leading-relaxed text-slate-600 sm:text-[15px]">
           A friendly, play-based way for your 3rd grader to focus better, think clearly, and feel proud - with one fun live class a week and cheerful tournaments to look forward to.
         </p>
 
-        {/* VSL Video - hero element */}
-        <div className="mx-auto mt-8 max-w-[760px]">
+        {/* VSL Video - hero element — facade for PageSpeed ( loads iframe only on click, cookie-less ) */}
+        <div className="mx-auto mt-6 max-w-[760px] sm:mt-8">
           <div className="kid-card overflow-hidden p-2 sm:p-3">
             <div className="flex items-center justify-between px-1 pb-2 sm:px-2">
               <span className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wide text-slate-900">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#FF6B6B] border-2 border-slate-900">
-                  <Play className="h-3.5 w-3.5 fill-white text-white ml-0.5" />
+                  <Play className="h-3.5 w-3.5 fill-[#1A2744] text-[#1A2744] ml-0.5" />
                 </span>
                 Watch: Real Group Training
               </span>
               <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#FFD23F] px-3 py-1 text-[11px] font-black uppercase tracking-wide border-2 border-slate-900">
-                <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" /> Live • Interactive • Fun
+                <span className="h-1.5 w-1.5 rounded-full bg-red-500" /> Live • Interactive • Fun
               </span>
             </div>
             <div className="overflow-hidden rounded-xl sm:rounded-2xl border-2 border-slate-900 bg-black">
               <div className="relative aspect-video w-full">
-                <iframe
-                  className="absolute inset-0 h-full w-full"
-                  src="https://www.youtube.com/embed/Urx2nBbI0-U?rel=0&modestbranding=1"
-                  title="ChessKidsNation Sample Group Training"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+                {!videoReady ? (
+                  <button
+                    type="button"
+                    onClick={() => setVideoReady(true)}
+                    className="group absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden"
+                    aria-label="Play ChessKidsNation group training video"
+                  >
+                    <img
+                      src={`https://i.ytimg.com/vi/${YOUTUBE_ID}/hqdefault.jpg`}
+                      alt="ChessKidsNation group training preview"
+                      width={760}
+                      height={428}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                    <span className="absolute inset-0 bg-black/15 transition-colors group-hover:bg-black/25" />
+                    <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-xl transition-transform group-hover:scale-105 sm:h-16 sm:w-16">
+                      <Play className="ml-0.5 h-6 w-6 fill-[#FF6B6B] text-[#FF6B6B] sm:h-7 sm:w-7" />
+                    </span>
+                  </button>
+                ) : (
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}?rel=0&modestbranding=1&autoplay=1`}
+                    title="ChessKidsNation Sample Group Training"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                )}
               </div>
             </div>
-            <p className="px-2 pt-2 pb-1 text-center text-xs font-semibold text-slate-500">
+            <p className="px-2 pt-2 pb-1 text-center text-[11px] font-semibold text-slate-500 sm:text-xs">
               See a real class - watch how kids learn, laugh, and play together with a kind coach
             </p>
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-500">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] font-bold text-slate-500 sm:text-xs">
             <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-[#06D6A0]"/> 1,200+ active students</span>
             <span className="hidden sm:inline text-slate-300">•</span>
             <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-[#FFD23F]"/> Rated 4.9/5 by parents</span>
             <span className="hidden sm:inline text-slate-300">•</span>
-            <span>USCF & FIDE-friendly coaching</span>
+            <span className="whitespace-nowrap">USCF & FIDE-friendly coaching</span>
           </div>
         </div>
 
@@ -110,7 +140,7 @@ export function Hero() {
         <div className="mx-auto mt-6 max-w-[560px]">
           <div className="relative">
             <div className="absolute -right-1 -top-3 hidden sm:block">
-              <div className="rounded-full bg-[#FF6B6B] px-3 py-1 text-xs font-black text-white border-2 border-slate-900 rotate-3 shadow-[2px_2px_0_#1A2744]">
+              <div className="rounded-full bg-[#FF6B6B] px-3 py-1 text-xs font-black text-[#1A2744] border-2 border-slate-900 rotate-3 shadow-[2px_2px_0_#1A2744]">
                 🎉 Demo!
               </div>
             </div>
@@ -131,10 +161,10 @@ export function Hero() {
         <div id="why-us" className="mx-auto mt-8 grid max-w-3xl gap-5">
           {/* Why families love us */}
           <div className="kid-card p-5 sm:p-6 text-left">
-            <h3 className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-slate-900">
+            <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-slate-900">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#FFD23F] border-2 border-slate-900 text-sm">✨</span>
               Why families love us
-            </h3>
+            </h2>
             <ul className="mt-4 space-y-3">
               {highlights.map((h) => (
                 <li key={h.text} className="flex items-start gap-3">
@@ -150,9 +180,9 @@ export function Hero() {
           {/* Monthly fees */}
           <div className="kid-card overflow-hidden text-left">
             <div className="bg-gradient-to-r from-[#7C3AED] to-[#FF6B6B] px-5 py-3">
-              <h3 className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white">
+              <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white">
                 <Star className="h-4 w-4 fill-white text-white" /> Monthly fees include
-              </h3>
+              </h2>
             </div>
             <ol className="space-y-3 p-5">
               {feesInclude.map((item, idx) => (
