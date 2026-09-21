@@ -1,95 +1,132 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Globe, Loader2, CheckCircle2 } from "lucide-react";
+import { Globe, Loader2, CheckCircle2 } from "lucide-react";
 
 const USA_COUNTRY = { code: "+1", label: "USA (+1)" };
 
-const US_STATES = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-  "District of Columbia",
-];
+const WEBHOOK_URL = "https://n8n.nomiris.com/webhook/ChessKidsNation";
+
+function getTrackingData() {
+  if (typeof window === "undefined") return {};
+  const params = new URLSearchParams(window.location.search);
+  const tracking: Record<string, string> = {};
+  // UTM + click ids
+  const keys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "utm_id",
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "fbclid",
+    "msclkid",
+    "ttclid",
+    "li_fat_id",
+  ];
+  for (const k of keys) {
+    const v = params.get(k);
+    if (v) tracking[k] = v;
+  }
+  // also capture any other query params for debugging
+  tracking["page_url"] = window.location.href;
+  tracking["referrer"] = document.referrer || "";
+  tracking["user_agent"] = navigator.userAgent || "";
+  tracking["language"] = navigator.language || "";
+  tracking["timezone"] = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  tracking["screen_resolution"] = `${window.screen.width}x${window.screen.height}`;
+  tracking["viewport_size"] = `${window.innerWidth}x${window.innerHeight}`;
+  return tracking;
+}
 
 export function DemoForm() {
-  const [region, setRegion] = useState("");
-  const [regionOpen, setRegionOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
+  const [parentName, setParentName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
+  const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = () => {
     const e: Record<string, string> = {};
     if (!name.trim()) e.name = "Child's name is required";
+    if (!parentName.trim()) e.parentName = "Parent's name is required";
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Valid email is required";
     const digits = phone.replace(/\D/g, "");
     if (!phone.trim()) e.phone = "Mobile number is required";
     else if (digits.length !== 10) e.phone = "Enter a valid 10-digit US mobile number";
-    if (!region) e.region = "Please select your state";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    setSubmitError(null);
+
+    const digits = phone.replace(/\D/g, "");
+    const tracking = getTrackingData();
+
+    const payload = {
+      // form fields
+      child_name: name.trim(),
+      parent_name: parentName.trim(),
+      parent_email: email.trim(),
+      phone: digits,
+      phone_full: `${USA_COUNTRY.code}${digits}`,
+      country_code: USA_COUNTRY.code,
+      country: "USA",
+      city: city.trim(),
+      message: message.trim(),
+      // campaign context
+      campaign: "USA-only",
+      brand: "ChessKidsNation",
+      form_id: "book-demo",
+      // extra info we can send
+      submitted_at: new Date().toISOString(),
+      ...tracking,
+      // flat UTM fields also top-level for n8n filtering
+      utm_source: tracking["utm_source"] || "",
+      utm_medium: tracking["utm_medium"] || "",
+      utm_campaign: tracking["utm_campaign"] || "",
+      utm_term: tracking["utm_term"] || "",
+      utm_content: tracking["utm_content"] || "",
+      gclid: tracking["gclid"] || "",
+      fbclid: tracking["fbclid"] || "",
+    };
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`Webhook failed: ${res.status}`);
+      // fire GTM / dataLayer event for conversion tracking
+      if (typeof window !== "undefined") {
+        const w = window as unknown as { dataLayer?: unknown[] };
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({
+          event: "generate_lead",
+          form: "book-demo",
+          ...payload,
+        });
+      }
       setSubmitted(true);
-    }, 1100);
+    } catch (err) {
+      console.error(err);
+      setSubmitError("Something went wrong. Please try again or WhatsApp us.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -143,6 +180,19 @@ export function DemoForm() {
           {errors.name && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.name}</p>}
         </div>
 
+        {/* Parent name */}
+        <div>
+          <input
+            value={parentName}
+            onChange={(e) => setParentName(e.target.value)}
+            type="text"
+            placeholder="Parent's Name *"
+            aria-invalid={!!errors.parentName}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.parentName ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+          />
+          {errors.parentName && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.parentName}</p>}
+        </div>
+
         {/* Parent email */}
         <div>
           <input
@@ -193,37 +243,25 @@ export function DemoForm() {
           className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
         />
 
-        {/* State — USA only */}
+        {/* Message — relevant, optional */}
         <div>
-          <button
-            type="button"
-            onClick={() => setRegionOpen((v) => !v)}
-            aria-invalid={!!errors.region}
-            className={`flex w-full items-center justify-between rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 ${errors.region ? "border-red-400 focus:border-red-400 focus:ring-red-100 text-slate-900" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
-          >
-            <span className={region ? "text-slate-900" : "text-slate-400"}>{region || "Select State *"}</span>
-            <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${regionOpen ? "rotate-180" : ""}`} />
-          </button>
-          {errors.region && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.region}</p>}
-          {regionOpen && (
-            <div className="mt-1 max-h-56 overflow-y-auto rounded-xl border-2 border-slate-900 bg-white p-1 shadow-[4px_4px_0_#1A2744]">
-              {US_STATES.map((r) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => {
-                    setRegion(r);
-                    setRegionOpen(false);
-                    setErrors((p) => ({ ...p, region: "" }));
-                  }}
-                  className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-[#FFFBEB]"
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          )}
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={3}
+            placeholder="Message (optional) — child's age, chess level, preferred demo time..."
+            className="w-full resize-none rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
+          />
+          <p className="mt-1 px-1 text-[11px] font-medium text-slate-500">
+            e.g. &quot;8 years old, beginner, weekday evenings EST work best&quot;
+          </p>
         </div>
+
+        {submitError && (
+          <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600">
+            {submitError}
+          </p>
+        )}
 
         <button
           type="submit"
