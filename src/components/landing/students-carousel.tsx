@@ -165,7 +165,7 @@ function StudentCard({ student: s }: { student: Student }) {
   return (
     <article
       data-card
-      className={`relative flex w-[88%] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border p-5 sm:w-[440px] sm:flex-row sm:p-6 ${
+      className={`relative flex w-[88%] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border p-5 sm:w-[440px] sm:p-6 ${
         isOrange
           ? "border-transparent bg-orange-500 text-white"
           : "border-orange-200 bg-white text-slate-900"
@@ -195,18 +195,8 @@ function StudentCard({ student: s }: { student: Student }) {
         />
       </svg>
 
-      {/* Image */}
-      <div className="relative z-10 flex w-full items-end justify-center sm:w-2/5">
-        <img
-          src={s.image}
-          alt={s.name}
-          className="h-44 w-auto object-contain drop-shadow-xl sm:h-56"
-          loading="lazy"
-        />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 mt-4 w-full sm:mt-0 sm:w-3/5 sm:pl-4">
+      {/* Content — images hidden for now (kids photos removed per request) */}
+      <div className="relative z-10 w-full">
         <h3
           className={`text-lg font-extrabold leading-tight ${
             isOrange ? "text-white" : "text-slate-900"
