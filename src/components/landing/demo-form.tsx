@@ -1,67 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Globe, Loader2, CheckCircle2 } from "lucide-react";
+import { Globe, Loader2, CheckCircle2 } from "lucide-react";
 
 const USA_COUNTRY = { code: "+1", label: "USA (+1)" };
 
-const US_STATES = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-  "District of Columbia",
-];
-
 export function DemoForm() {
-  const [region, setRegion] = useState("");
-  const [regionOpen, setRegionOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
@@ -69,6 +13,7 @@ export function DemoForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
+  const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = () => {
@@ -79,7 +24,6 @@ export function DemoForm() {
     const digits = phone.replace(/\D/g, "");
     if (!phone.trim()) e.phone = "Mobile number is required";
     else if (digits.length !== 10) e.phone = "Enter a valid 10-digit US mobile number";
-    if (!region) e.region = "Please select your state";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -208,36 +152,18 @@ export function DemoForm() {
           className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
         />
 
-        {/* State — USA only */}
+        {/* Message — relevant, optional */}
         <div>
-          <button
-            type="button"
-            onClick={() => setRegionOpen((v) => !v)}
-            aria-invalid={!!errors.region}
-            className={`flex w-full items-center justify-between rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 ${errors.region ? "border-red-400 focus:border-red-400 focus:ring-red-100 text-slate-900" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
-          >
-            <span className={region ? "text-slate-900" : "text-slate-400"}>{region || "Select State *"}</span>
-            <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${regionOpen ? "rotate-180" : ""}`} />
-          </button>
-          {errors.region && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.region}</p>}
-          {regionOpen && (
-            <div className="mt-1 max-h-56 overflow-y-auto rounded-xl border-2 border-slate-900 bg-white p-1 shadow-[4px_4px_0_#1A2744]">
-              {US_STATES.map((r) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => {
-                    setRegion(r);
-                    setRegionOpen(false);
-                    setErrors((p) => ({ ...p, region: "" }));
-                  }}
-                  className="block w-full rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 hover:bg-[#FFFBEB]"
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          )}
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={3}
+            placeholder="Message (optional) — child's age, chess level, preferred demo time..."
+            className="w-full resize-none rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#FFD23F]/40"
+          />
+          <p className="mt-1 px-1 text-[11px] font-medium text-slate-500">
+            e.g. &quot;8 years old, beginner, weekday evenings EST work best&quot;
+          </p>
         </div>
 
         <button
