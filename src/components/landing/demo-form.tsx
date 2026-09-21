@@ -65,6 +65,7 @@ export function DemoForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
+  const [parentName, setParentName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
@@ -73,6 +74,7 @@ export function DemoForm() {
   const validate = () => {
     const e: Record<string, string> = {};
     if (!name.trim()) e.name = "Child's name is required";
+    if (!parentName.trim()) e.parentName = "Parent's name is required";
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Valid email is required";
     const digits = phone.replace(/\D/g, "");
     if (!phone.trim()) e.phone = "Mobile number is required";
@@ -141,6 +143,19 @@ export function DemoForm() {
             className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.name ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
           />
           {errors.name && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.name}</p>}
+        </div>
+
+        {/* Parent name */}
+        <div>
+          <input
+            value={parentName}
+            onChange={(e) => setParentName(e.target.value)}
+            type="text"
+            placeholder="Parent's Name *"
+            aria-invalid={!!errors.parentName}
+            className={`w-full rounded-2xl border-2 bg-white px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${errors.parentName ? "border-red-400 focus:border-red-400 focus:ring-red-100" : "border-slate-200 focus:border-[#7C3AED] focus:ring-[#FFD23F]/40"}`}
+          />
+          {errors.parentName && <p className="mt-1 px-1 text-xs font-semibold text-red-500">{errors.parentName}</p>}
         </div>
 
         {/* Parent email */}
