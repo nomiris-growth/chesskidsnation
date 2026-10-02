@@ -69,6 +69,10 @@ export function DemoForm() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+
+    // Open the confirmation tab during the user gesture so browsers don't
+    // treat it as an unsolicited popup after the webhook request completes.
+    const confirmationTab = window.open("about:blank", "_blank");
     setSubmitting(true);
     setSubmitError(null);
 
@@ -121,7 +125,14 @@ export function DemoForm() {
         });
       }
       setSubmitted(true);
+      const thankYouUrl = new URL("/thank-you", window.location.origin);
+      if (confirmationTab) {
+        confirmationTab.location.replace(thankYouUrl.toString());
+      } else {
+        window.open(thankYouUrl.toString(), "_blank", "noopener,noreferrer");
+      }
     } catch (err) {
+      confirmationTab?.close();
       console.error(err);
       setSubmitError("Something went wrong. Please try again or WhatsApp us.");
     } finally {
